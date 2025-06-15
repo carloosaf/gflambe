@@ -38,7 +38,7 @@ import gflambe
 import math
 
 pub fn main() {
-  options = [
+  let options = [
     gflambe.OutputFormat(gflambe.Svg),
   ]
 
@@ -61,7 +61,7 @@ import gleam/erlang/process
 import math
 
 pub fn main() {
-  options = [
+  let options = [
     gflambe.OutputFormat(gflambe.Svg),
     gflambe.OutputDirectory("/tmp"),
   ]
