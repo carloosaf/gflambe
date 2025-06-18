@@ -1,13 +1,29 @@
+import gflambe.{GflambeFunction}
+import gleam/erlang/process
+import gleam/string
 import gleeunit
 
 pub fn main() -> Nil {
   gleeunit.main()
 }
 
-// gleeunit test functions end in `_test`
-pub fn hello_world_test() {
-  let name = "Joe"
-  let greeting = "Hello, " <> name <> "!"
+pub fn apply_test() {
+  gflambe.apply(
+    fn() {
+      let _ = string.append("hello", "world")
+      Nil
+    },
+    [gflambe.OutputDirectory("./test")],
+  )
+}
 
-  assert greeting == "Hello, Joe!"
+pub fn capture_test() {
+  process.spawn(fn() {
+    process.sleep(400)
+    string.append("hello", "world")
+  })
+
+  gflambe.capture(GflambeFunction("gleam@string", "append", 2), 1, [
+    gflambe.OutputDirectory("./test"),
+  ])
 }
